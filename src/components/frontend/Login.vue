@@ -72,11 +72,11 @@ export default {
   mounted () {
     const myModalEl = document.querySelector('#loginModel')
     this.myModal = new bootstrap.Modal(myModalEl, {
-      backdrop: 'static'
+      backdrop: true
     })
-    // myModalEl.addEventListener('hidden.bs.modal', function (event) {
-    //   $('.modal-backdrop').remove()
-    // })
+    myModalEl.addEventListener('hidden.bs.modal', function (event) {
+      $('.modal-backdrop').remove()
+    })
     this.$bus.$on('openLoginModel', () => {
       this.myModal.show()
     })
