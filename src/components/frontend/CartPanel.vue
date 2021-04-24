@@ -2,9 +2,9 @@
   <div>
     <div class="cartBackDrop" v-if="cartPanelOpen" @click.prevent="toggleCartPanel()"></div>
     <div class="cartPanel" :class="{ 'open' : cartPanelOpen }">
-      <div class="d-flex justify-content-between align-items-center p-3">
+      <div class="d-flex justify-content-between align-items-center px-3 py-2">
         <h4 class="mb-0" v-if="cartInfo.carts">購物車 ({{cartInfo.carts.length}})</h4>
-        <a href="#" @click.prevent="toggleCartPanel()" class="p-2 material-icons">close</a>
+        <a href="#" @click.prevent="toggleCartPanel()" class="p-2 material-icons h1">close</a>
       </div>
       <p class="h5 text-center pt-4 fw-bold" v-if="!cartInfo.carts">購物車內沒有商品</p>
       <ul class="list-unstyled mb-0 p-4" v-if="cartInfo.carts">
