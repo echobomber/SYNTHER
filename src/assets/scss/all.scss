@@ -1,12 +1,20 @@
 @import  "~bootstrap/scss/_functions";
-@import  "./helpers/_BSvariables";
+@import  "./helpers/_variables";
 @import "~bootstrap/scss/bootstrap";
 
 // 通用
-@import  "./common/_mixins";
-// 元件
-// @import  "./components/_dashboard";
-// 前台
-@import  "./frontend/_index";
+@import  "./_common";
+@import  "./helpers/_mixins";
 
-// 後台
+// 前台元件
+@import  "./components/frontend/_navbar";
+@import  "./components/frontend/_asideBar";
+@import  "./components/frontend/_cartPanel";
+
+// 後台元件
+
+// 前台 view
+@import  "./view/frontend/_index";
+@import  "./view/frontend/_product";
+
+// 後台 view

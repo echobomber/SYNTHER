@@ -1,7 +1,24 @@
 <template>
   <div>
-    <div class="CartPanel" ref="CartPanel" :class="{ 'open' : cartPanelOpen }">
-      <a href="#" @click="openCartPanel()"><span class="material-icons">close</span></a>
+    <div class="cartBackDrop" v-if="cartPanelOpen" @click.prevent="toggleCartPanel()"></div>
+    <div class="cartPanel" :class="{ 'open' : cartPanelOpen }">
+      <div class="d-flex justify-content-between align-items-center p-3">
+        <h4 class="mb-0" v-if="cartInfo.carts">購物車 ({{cartInfo.carts.length}})</h4>
+        <a href="#" @click.prevent="toggleCartPanel()" class="p-2 material-icons">close</a>
+      </div>
+      <p class="h5 text-center pt-4 fw-bold" v-if="!cartInfo.carts">購物車內沒有商品</p>
+      <ul class="list-unstyled mb-0 p-4" v-if="cartInfo.carts">
+        <li class="d-flex justify-content-between align-items-center pb-4" v-for="cart in cartInfo.carts" :key="cart.product_id">
+          <div class="d-flex align-items-center">
+            <img class="cartPanel__img" :src="cart.product.imageUrl" alt="">
+            <div class="ms-3">
+              <h5 class="fw-bold">{{ cart.product.title }}</h5>
+              <p>x{{ cart.qty }} ${{ cart.product.price }}</p>
+            </div>
+          </div>
+          <a href="#" class="material-icons p-2" @click.prevent="removeCart(cart.id)">delete</a>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -16,13 +33,16 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('cartModules', ['cartPanelOpen'])
+    ...mapGetters('cartModules', ['cartPanelOpen', 'cartInfo'])
   },
   methods: {
-    ...mapActions('cartModules', ['openCartPanel'])
+    removeCart (id) {
+      this.$store.dispatch('cartModules/removeCart', id)
+    },
+    ...mapActions('cartModules', ['toggleCartPanel', 'getCart'])
   },
   mounted () {
-
+    this.getCart()
   }
 }
 </script>

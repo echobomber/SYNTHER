@@ -2,28 +2,36 @@
   <div>
     <!-- Modal -->
     <div class="modal fade" id="loginModel" tabindex="-1" aria-labelledby="loginModel" aria-hidden="true" ref="loginModel">
-      <div class="modal-dialog">
+      <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
+        <!--
+          <Form class="modal-body" v-slot="{ errors }" @submit="login">
+            <h5 class="modal-title" id="exampleModalLabel">登入帳戶</h5>
+
+          </Form>
+          -->
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">登入</h5>
+            <h5 class="modal-title" id="exampleModalLabel">登入帳戶</h5>
             <button type="button" class="btn-close"  aria-label="Close" @click.prevent="closeModel()"></button>
           </div>
-          <div class="modal-body">
-            <form>
-              <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" v-model="user.username">
+          <Form v-slot="{ errors }" @submit="login">
+            <div class="modal-body">
+              <div class="form-floating mb-3">
+                <Field type="email" name="會員帳號" class="form-control" :class="{ 'is-invalid': errors['會員帳號'] }" rules="email|required" id="username" v-model="user.username" placeholder="帳號" @keyup.enter="login"></Field>
+                <label for="username" class="form-label">輸入信箱</label>
+                <error-message name="會員帳號" class="invalid-feedback"></error-message>
               </div>
-              <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" v-model="user.password">
+              <div class="form-floating mb-3">
+                <Field type="password" name="登入密碼" class="form-control" :class="{ 'is-invalid': errors['登入密碼'] }" rules="required" id="password" v-model="user.password" placeholder="密碼" @keyup.enter="login"></Field>
+                <label for="password" class="form-label">輸入密碼</label>
+                <error-message name="登入密碼" class="invalid-feedback"></error-message>
               </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary">Close</button>
-            <button type="submit" class="btn btn-primary" @click.prevent="login()">Submit</button>
-          </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">登入</button>
+            </div>
+          </Form>
+
         </div>
       </div>
     </div>
@@ -43,7 +51,7 @@ export default {
   components: {},
   data () {
     return {
-      myModal: '',
+      loginModal: '',
       user: {
         username: '',
         password: ''
@@ -54,31 +62,34 @@ export default {
   },
   methods: {
     closeModel () {
-      this.myModal.hide()
+      this.loginModal.hide()
       $('.modal-backdrop').remove()
     },
     login () {
-      const api = `${process.env.VUE_APP_BEAPIPATH}/admin/signin`
+      this.closeModel()
+      this.$store.dispatch('updateLoading', true)
+      const api = `${process.env.VUE_APP_APIPATH}/admin/signin`
       this.$http.post(api, this.user).then((response) => {
-        console.log(response.data)
+        console.log(response.data.message)
         const token = response.data.token
         const expired = response.data.expired
         document.cookie = `hexToken=${token};expires=${new Date(expired)};`
-        this.closeModel()
-        this.$router.push('/about')
+        this.$store.dispatch('updateLoading', false)
+        // this.$router.push('/admin')
       })
     }
   },
   mounted () {
-    const myModalEl = document.querySelector('#loginModel')
-    this.myModal = new bootstrap.Modal(myModalEl, {
-      backdrop: true
-    })
-    myModalEl.addEventListener('hidden.bs.modal', function (event) {
+    // Bootstrap 5 有 Bug，loginModal 必須使用 document.getElementById，不能使用 jQuery 的 $
+    const loginModalEl = document.getElementById('loginModel')
+    this.loginModal = new bootstrap.Modal(loginModalEl)
+    // hidden.bs.modal 必須用 jQuery 才可以觸發，用 addEventListener 不會觸發
+    $('#loginModel').on('hidden.bs.modal', function (event) {
       $('.modal-backdrop').remove()
+      console.log('測試觸發 hidden.bs.modal')
     })
     this.$bus.$on('openLoginModel', () => {
-      this.myModal.show()
+      this.loginModal.show()
     })
   }
 }

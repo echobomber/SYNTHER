@@ -1,27 +1,34 @@
 <template>
-  <nav class="index-navbar" ref="indexNavbar">
-    <div class="topBar container" ref="topBar">
-      <h1 class="mb-0"><a href="#" class="index-logo">SYNTHER</a></h1>
+  <nav class="commonNavbar" ref="indexNavbar">
+    <div class="commonNavbar-top container" ref="commonNavbar-top">
+      <h1 class="mb-0"><router-link to="/" class="commonNavbar-top__logo">SYNTHER</router-link></h1>
       <!--
-        <a href="#"><span class="material-icons">menu</span></a>
+        <a href="#" class="material-icons">menu</a>
       -->
     </div>
-    <div class="bottomBar container">
-      <ul class="bottomBar-routerLink list-unstyled mb-1">
-        <li><a href="#">線上聆聽</a></li>
-        <li><a href="#">購買專輯</a></li>
-        <li><a href="#">聯絡我們</a></li>
+    <div class="commonNavbar-bottom container">
+      <ul class="commonNavbar-bottom__routerList ps-0 mb-1">
+        <li><router-link to="/product">線上聆聽</router-link></li>
+        <li><router-link to="/product">購買專輯</router-link></li>
+        <li><router-link to="/product">聯絡我們</router-link></li>
       </ul>
-      <ul class="bottomBar-iconNav list-unstyled mb-0">
-        <li><a href="#" class="bottomBar-iconNav-link" @click.prevent="openLoginModel()"><span class="material-icons">person</span></a></li>
-        <li><a href="#" class="bottomBar-iconNav-link" @click.prevent="openCartPanel()"><span class="material-icons">shopping_cart</span></a></li>
-        <li><a href="#" class="bottomBar-iconNav-link"><span class="material-icons">search</span></a></li>
+      <ul class="commonNavbar-bottom__iconNav mb-0">
+        <li class="me-3">
+          <a href="#" class="material-icons p-2" @click.prevent="openLoginModel()">person</a>
+        </li>
+        <li class="position-relative me-3">
+          <a href="#" class="material-icons p-2" @click.prevent="toggleCartPanel()">shopping_cart</a>
+          <div class="commonNavbar-bottom__cartNum" v-if="cartInfo.carts">{{ cartInfo.carts.length }}</div>
+        </li>
+        <li class="me-3">
+          <a href="#" class="material-icons p-2">search</a>
+        </li>
       </ul>
     </div>
   </nav>
 </template>
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'Navbar',
@@ -35,7 +42,10 @@ export default {
     openLoginModel () {
       this.$bus.$emit('openLoginModel')
     },
-    ...mapActions('cartModules', ['openCartPanel'])
+    ...mapActions('cartModules', ['toggleCartPanel'])
+  },
+  computed: {
+    ...mapGetters('cartModules', ['cartInfo'])
   },
   mounted () {
     let prevScrollpos = window.pageYOffset

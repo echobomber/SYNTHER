@@ -1,9 +1,6 @@
 <template>
-  <div class="position-relative">
-
-    <Navbar />
-    <AsideNavbar />
-    <div id="carouselExampleControls" class="carousel slide index-carousel container" data-bs-ride="carousel">
+  <div>
+    <div id="carouselExampleControls" class="carousel slide index-carousel container mb-5" data-bs-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item active">
           <img src="@/assets/img/banner.jpg" class="d-block w-100" alt="...">
@@ -24,31 +21,62 @@
         <span class="visually-hidden">Next</span>
       </button>
     </div>
-    <CartPanel />
-    <Login class="text-center"/>
+    <!---->
+    <div class="container">
+      <h3 class="standout-title h1">Music Genre</h3>
+      <!-- Swiper -->
+      <swiper
+          :slides-per-view="3"
+          :space-between="30"
+          :slides-per-group="3"
+          loop
+          navigation
+          :pagination="{ el: '.swiper-pagination', clickable: true }"
+          :scrollbar="{ draggable: true }"
+          @swiper="onSwiper"
+          @slideChange="onSlideChange"
+        >
+          <swiper-slide><img src="https://i.kfs.io/album/global/114108801,0v1/fit/500x500.jpg" alt=""></swiper-slide>
+          <swiper-slide><img src="https://i.kfs.io/album/global/114108801,0v1/fit/500x500.jpg" alt=""></swiper-slide>
+          <swiper-slide><img src="https://i.kfs.io/album/global/114108801,0v1/fit/500x500.jpg" alt=""></swiper-slide>
+          <swiper-slide><img src="https://i.kfs.io/album/global/114108801,0v1/fit/500x500.jpg" alt=""></swiper-slide>
+          <swiper-slide><img src="https://i.kfs.io/album/global/114108801,0v1/fit/500x500.jpg" alt=""></swiper-slide>
+          <swiper-slide><img src="https://i.kfs.io/album/global/114108801,0v1/fit/500x500.jpg" alt=""></swiper-slide>
+      </swiper>
+    </div>
   </div>
 </template>
 <script>
-import Navbar from '@/components/frontend/Navbar.vue'
-import Login from '@/components/frontend/Login.vue'
-import AsideNavbar from '@/components/frontend/Aside_Navbar.vue'
-import CartPanel from '@/components/frontend/CartPanel.vue'
+// import Swiper core and required modules
+import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper'
+// Import Swiper Vue.js components
+import { Swiper, SwiperSlide } from 'swiper/vue'
+// Import Swiper styles
+import 'swiper/swiper.scss'
+import 'swiper/components/navigation/navigation.scss'
+import 'swiper/components/pagination/pagination.scss'
+import 'swiper/components/scrollbar/scrollbar.scss'
+
+// install Swiper modules
+SwiperCore.use([Navigation, Pagination, Scrollbar, A11y])
 
 export default {
   name: 'index',
   components: {
-    Navbar,
-    AsideNavbar,
-    CartPanel,
-    Login
+    Swiper,
+    SwiperSlide
   },
   data () {
     return {
     }
   },
   methods: {
-  },
-  computed: {
+    onSwiper (swiper) {
+      console.log(swiper)
+    },
+    onSlideChange () {
+      console.log('slide change')
+    }
   },
   created () {
   }

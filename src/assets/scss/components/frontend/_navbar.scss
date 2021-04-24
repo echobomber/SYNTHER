@@ -1,0 +1,90 @@
+.commonNavbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background-color: #fff;
+  transition: top 0.3s;
+}
+.commonNavbar-top {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  &__logo {
+    display: block;
+    background-image: url('~@/assets/img/logo.png');
+    width: 180px;
+    height: 30px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    overflow: hidden;
+    text-indent: 101%;
+    white-space: nowrap;
+  }
+}
+.commonNavbar-bottom {
+  position: relative;
+  &__routerList {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    a {
+      display: block;
+      padding: 10px 20px;
+    }
+    li:nth-child(2) {
+      position: relative;
+      &::before,  &::after{
+        content: "";
+        display: block;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%); 
+        width: .1rem;
+        background-color: #e5e5e5;
+        height: 1.5rem;
+      }
+      &::after {
+        right: 0;
+      }
+    }
+  }
+  &__iconNav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    position: fixed;
+    top: auto; 
+    bottom: 0;
+    right: 0;
+    left: 0;
+    transform: translateY(0);
+    background-color: #e5e5e5;
+    @include mobile {
+      position: absolute;
+      top: 50%;    
+      right: 0;
+      bottom: auto;
+      left: auto;
+      transform: translateY(-50%);
+      background-color: #fff;
+    }
+  }
+  &__cartNum {
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: $gray-400;
+  }
+}

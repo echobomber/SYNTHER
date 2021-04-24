@@ -3,16 +3,43 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 const routes = [
   {
     path: '/',
-    name: 'index',
-    component: () => import('../views/frontend/index.vue')
+    name: 'FrontPage',
+    component: () => import('../views/frontend/FrontPage.vue'),
+    children: [
+      {
+        path: '',
+        name: 'Index',
+        component: () => import('../views/frontend/Index.vue')
+      },
+      {
+        path: 'product',
+        name: 'Product',
+        component: () => import('../views/frontend/Product.vue')
+      },
+      {
+        path: 'product_detail',
+        name: 'product_detail',
+        component: () => import('../views/frontend/Product_Detail.vue')
+      },
+      {
+        path: 'about',
+        name: 'About',
+        component: () => import('../views/frontend/About.vue')
+      }
+    ]
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/frontend/About.vue')
+    path: '/admin',
+    name: 'Admin',
+    component: () => import('../views/backend/Admin.vue'),
+    meta: { requiresAuth: true },
+    children: [
+      {
+        path: 'products',
+        name: 'BE_Products',
+        component: () => import('../views/backend/BE_Products.vue')
+      }
+    ]
   }
 ]
 
