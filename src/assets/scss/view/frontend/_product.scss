@@ -1,26 +1,33 @@
 .product-banner {
   position: relative;
   display: flex;
-  justify-content: center;
+  // justify-content: center;
   align-items: center;
-  color: #fff;
-  height: 150px;
-  background-image: url('~@/assets/img/product_banner.png');
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  background-attachment: fixed;
+  color: #000000;
+  height: 300px;
+  background: url('~@/assets/img/page_banner2.png') center center / cover no-repeat;
   @include mobile{
     height: 400px;
+    background: 
+      url('~@/assets/img/headphone.png') right -5% center / 50% no-repeat,
+      url('~@/assets/img/page_banner2.png') center center / cover no-repeat ;
   }
   &__title {
+    display: flex;
+    align-items: center;
     z-index: 1;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 200;
+    font-size: 2rem;
+    .material-icons {
+      font-size: 2rem;
+    }
   }
   &__cover {
     position: absolute;
     width: 100%;
     height: 100%;
-    background-color: #000000;
+    // background-color: #000000;
     opacity: 30%;
   }
 }

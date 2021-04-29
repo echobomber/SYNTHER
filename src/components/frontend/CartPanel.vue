@@ -10,7 +10,7 @@
       <ul class="list-unstyled mb-0 p-4" v-if="cartInfo.carts">
         <li class="d-flex justify-content-between align-items-center pb-4" v-for="cart in cartInfo.carts" :key="cart.product_id">
           <div class="d-flex align-items-center">
-            <img class="cartPanel__img" :src="cart.product.imageUrl" alt="">
+            <img class="cartPanel__img" :src="cart.product.image" alt="">
             <div class="ms-3">
               <h5 class="fw-bold">{{ cart.product.title }}</h5>
               <p>x{{ cart.qty }} ${{ cart.product.price }}</p>

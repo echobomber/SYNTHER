@@ -6,6 +6,13 @@
   z-index: 10;
   background-color: #fff;
   transition: top 0.3s;
+  &__closeBtn {
+    position: absolute;
+    font-size: 2rem;
+    top: 15px;
+    right: 10px;
+    color: #fff;
+  }
 }
 .commonNavbar-top {
   display: flex;
@@ -39,12 +46,33 @@
     }
   }
 }
+.l-commonNavbar-bottom__routerList {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0 , 0 , 0 , 0.9);
+  transition: all .3s;
+  transform: translateX(-100%);
+  overflow: hidden;
+  @include mobile {
+    position: static;
+    display: block;
+    background: #fff;
+    width: auto;
+  }
+  &.isOpen {
+    transform: translateX(0);
+  }
+}
 .commonNavbar-bottom {
   position: relative;
   &__routerList {
-    display: none;
     @include mobile {
-      position: relative;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -52,7 +80,12 @@
     }
     a {
       display: block;
+      white-space: nowrap;
       padding: 10px 20px;
+      color: #fff;
+      @include mobile {
+        color: #000000;
+      }
     }
     li:nth-child(2) {
       position: relative;
@@ -82,7 +115,8 @@
     right: 0;
     left: 0;
     transform: translateY(0);
-    background-color: #e5e5e5;
+    // background-color: #e5e5e5;
+    background-color: $gray-200;
     padding: 5px;
     @include mobile {
       position: absolute;
@@ -104,47 +138,16 @@
   &__cartNum {
     position: absolute;
     top: 0;
-    right: 15px;
+    right: 18px;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background-color: $gray-400;
+    background-color: $skyBlue;
     @include mobile {
-      right: -5px;
+      right: 3px;
     }
-  }
-}
-.commonNavbar-phoneMenu {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgba(0 , 0 , 0 , 0.9);
-  transition: height .3s;
-  height: 0;
-  overflow: hidden;
-  &.isOpen {
-    height: 100%;
-  }
-  &__routerList {
-    white-space: nowrap;
-    list-style: none;
-    a {
-      color: #fff;
-    }    
-  }
-  &__closeBtn {
-    position: absolute;
-    font-size: 2rem;
-    top: 15px;
-    right: 10px;
-    color: #fff;
   }
 }

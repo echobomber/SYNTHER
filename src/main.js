@@ -18,9 +18,6 @@ import zhTW from '@vee-validate/i18n/dist/locale/zh_TW.json'
 import Loading from 'vue3-loading-overlay'
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css'
 
-// mitt 全域註冊
-import bus from './bus'
-
 // vee-validate 驗證規則
 defineRule('required', required)
 defineRule('email', email)
@@ -34,7 +31,6 @@ setLocale('zh_TW') // 設定預設語系
 const app = createApp(App)
 app.use(store).use(router)
 app.use(VueAxios, axios)
-app.config.globalProperties.$bus = bus
 // 註冊 vee-validate 三個全域元件
 app.component('Form', Form)
 app.component('Field', Field)

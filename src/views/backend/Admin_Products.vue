@@ -1,12 +1,11 @@
 <template>
-  <div class="container">
+  <div>
     <!-- Button trigger modal -->
     <div class="d-flex justify-content-end">
       <button type="button" class="btn btn-primary text-center mb-3" data-bs-target="#editModel" @click.prevent="openProductModel(isNew = true)">
         建立新的產品
       </button>
     </div>
-    <!-- Fujii Kaze 歌 -->
     <!-- 編輯 Modal -->
     <div class="modal fade" id="productModal" ref="productModal" tabindex="-1" aria-labelledby="productModal" aria-hidden="true" v-if="tempProduct.options">
       <div class="modal-dialog modal-xl">
@@ -174,6 +173,7 @@ export default {
   },
   data () {
     return {
+      isOpen: false,
       productModal: '',
       delProductModal: '',
       isNew: true,

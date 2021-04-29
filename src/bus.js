@@ -1,7 +1,3 @@
+// 跨組件的資訊傳遞用 mitt，需要設定一個事件中心 eventHub
 import mitt from 'mitt'
-const bus = {}
-const emitter = mitt()
-bus.$on = emitter.on
-bus.$off = emitter.off
-bus.$emit = emitter.emit
-export default bus
+export default mitt()

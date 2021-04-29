@@ -2,7 +2,7 @@
   <div class="container">
   <loading :active="isLoading"></loading>
     <div class="product-banner mb-5">
-      <h2 class="product-banner__title display-5">商品專區</h2>
+      <h2 class="product-banner__title ms-md-5 ms-2"><span class="material-icons me-3">play_circle_filled</span>Product sale</h2>
       <div class="product-banner__cover"></div>
     </div>
     <div class="product-search p-4 row mb-5">
@@ -27,9 +27,8 @@
     <div class="d-flex justify-content-between">
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="#">Home</a></li>
-          <li class="breadcrumb-item"><a href="#">Library</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Data</li>
+          <li class="breadcrumb-item"><a href="#" @click.prevent="filterCategory">全部</a></li>
+          <li class="breadcrumb-item active"><a href="#" @click.prevent="filterCategory">{{ categoryName }}</a></li>
         </ol>
       </nav>
       <ul class="d-flex justify-content-center list-unstyled  mb-3">
@@ -42,11 +41,11 @@
       </ul>
     </div>
     <!---->
-    <ul class="row list-unstyled" v-if="produtInfo">
+    <ul class="row list-unstyled" v-if="produtInfo" data-aos="fade-up">
       <li class="col-md-3 col-sm-6" v-for="product in productShowList" :key="product">
         <div class="product-card">
           <div class="position-relative">
-            <img class="img-fluid" :src="product.imageUrl" alt="">
+            <img class="img-fluid" :src="product.image" alt="">
             <div class="product-card__cover" v-if="product.is_enabled">
               <ul class="product-card__iconList m-2">
                 <li class="me-2">
@@ -76,6 +75,8 @@
   </div>
 </template>
 <script>
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 import mixins from '@/mixins'
 import Pagination from '@/components/frontend/Pagination.vue'
 import { mapActions, mapGetters } from 'vuex'
@@ -89,6 +90,7 @@ export default {
   data () {
     return {
       keywords: '',
+      categoryName: '',
       productShowList: []
     }
   },
@@ -104,16 +106,22 @@ export default {
     filterCategory (e) {
       let target = e.target.textContent
       target = target.trim().toLowerCase()
-      const productShow = this.produtInfo.filter(item => {
-        if (item.category) {
-          const category = item.category.trim().toLowerCase()
-          return category.match(target)
-        }
-      })
-      this.productShowList = productShow
+      if (target === '全部') {
+        this.categoryName = ''
+        this.productShowList = this.produtInfo
+        return 0
+      } else {
+        this.categoryName = target
+        const productShow = this.produtInfo.filter(item => {
+          if (item.category) {
+            const category = item.category.trim().toLowerCase()
+            return category.match(target)
+          }
+        })
+        this.productShowList = productShow
+      }
     },
     addtoCart (id, qty = 1) {
-      // 加入購物車有問題，但刪除購物車沒問題
       this.$store.dispatch('cartModules/addtoCart', { id, qty })
     },
     ...mapActions('productModules', ['getProductAll'])
@@ -131,6 +139,7 @@ export default {
   },
   created () {
     this.getProductAll()
+    AOS.init()
   }
 }
 </script>

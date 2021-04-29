@@ -8,13 +8,15 @@
 
 // 前台元件
 @import  "./components/frontend/_navbar";
-@import  "./components/frontend/_asideBar";
+@import  "./components/frontend/_asidebar";
 @import  "./components/frontend/_cartPanel";
-
+@import  "./components/frontend/_login";
 // 後台元件
-
+@import  "./components/backend/_admin_asidebar";
+@import  "./components/backend/_admin_navbar";
 // 前台 view
 @import  "./view/frontend/_index";
 @import  "./view/frontend/_product";
 
 // 後台 view
+@import  "./view/backend/_admin";

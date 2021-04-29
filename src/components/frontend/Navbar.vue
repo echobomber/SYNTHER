@@ -5,11 +5,6 @@
       <a href="#" class="commonNavbar-top__menuToggle material-icons p-2" @click.prevent="openMenu = true">menu</a>
     </div>
     <div class="commonNavbar-bottom container py-sm-2">
-      <ul class="commonNavbar-bottom__routerList ps-0 mb-0">
-        <li><router-link to="/product">線上聆聽</router-link></li>
-        <li><router-link to="/product">購買專輯</router-link></li>
-        <li><router-link to="/product">聯絡我們</router-link></li>
-      </ul>
       <ul class="commonNavbar-bottom__iconNav mb-0">
         <li class="me-2">
           <a href="#" class="material-icons" @click.prevent="openLoginModel()">person</a>
@@ -22,21 +17,21 @@
           <a href="#" class="material-icons">search</a>
         </li>
       </ul>
-    </div>
-    <!-- -->
-    <div class="commonNavbar-phoneMenu" :class="{ 'isOpen' : openMenu }">
-      <a href="#" class="commonNavbar-phoneMenu__closeBtn material-icons p-2" @click.prevent="openMenu = false">close</a>
-      <ul class="commonNavbar-phoneMenu__routerList ps-0 mb-1">
-        <li><router-link to="/product">線上聆聽</router-link></li>
-        <li><router-link to="/product">購買專輯</router-link></li>
-        <li><router-link to="/product">聯絡我們</router-link></li>
-      </ul>
+      <!-- 避免設定成 position: fixed 後被覆蓋掉，所以放後面 -->
+      <div class="l-commonNavbar-bottom__routerList" :class="{ 'isOpen' : openMenu }">
+        <a href="#" class="commonNavbar__closeBtn material-icons p-2" v-if="openMenu" @click.prevent="openMenu = false">close</a>
+        <ul class="commonNavbar-bottom__routerList ps-0 mb-0">
+          <li><router-link to="/product" @click.prevent="openMenu = false">線上聆聽</router-link></li>
+          <li><router-link to="/product" @click.prevent="openMenu = false">購買專輯</router-link></li>
+          <li><router-link to="/product" @click.prevent="openMenu = false">聯絡我們</router-link></li>
+        </ul>
+      </div>
     </div>
   </nav>
 </template>
 <script>
 import { mapActions, mapGetters } from 'vuex'
-
+import bus from '@/bus.js'
 export default {
   name: 'Navbar',
   components: {},
@@ -47,7 +42,7 @@ export default {
   },
   methods: {
     openLoginModel () {
-      this.$bus.$emit('openLoginModel')
+      bus.emit('openLoginModel')
     },
     ...mapActions('cartModules', ['toggleCartPanel'])
   },

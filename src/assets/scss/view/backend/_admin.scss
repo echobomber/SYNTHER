@@ -1,0 +1,7 @@
+.admin-content {
+  transition: all 0.3s;
+  margin-left: 0;
+  &.open {
+    margin-left: 20%;
+  }
+}
