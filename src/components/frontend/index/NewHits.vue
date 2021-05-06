@@ -32,10 +32,10 @@
           >
             <div class="d-flex align-items-center">
               <img class="newHits-playList__img" :src="item.album.artist.images[0].url" :alt="item.name">
-              <a href="#" class="newHits-playList__title" :title="item.album.artist.name">{{ index + 1 }}. {{ item.name }}</a>
+              <a href="#" class="newHits-playList__title" :title="item.album.artist.name" @click.prevent="playMusic(item)">{{ index + 1 }}. {{ item.name }}</a>
             </div>
             <div class="newHits-playList__btn me-sm-2">
-              <a href="#" class="material-icons" @click.prevent="openPanel">queue_music</a>
+              <a href="#" class="material-icons" @click.prevent="playMusic(item)">queue_music</a>
               <a href="#"><i class="fab fa-youtube"></i></a>
             </div>
           </li>
@@ -44,7 +44,7 @@
     </div>
   </section>
   <!-- KKBOX 面板 -->
-  <kkboxModal ref="kkboxModal"></kkboxModal>
+  <kkboxModal ref="kkboxModal" :music-src="musicObject"></kkboxModal>
 </template>
 
 <script>
@@ -62,12 +62,20 @@ export default {
       regionCount: 0,
       musicList: {},
       YTData: [],
-      musicID: ''
+      musicID: '',
+      musicObject: {
+        id: 'DZrC8m29ciOFY2JAm3',
+        type: 'album',
+        autoplay: true
+      }
     }
   },
   methods: {
-    openPanel () {
-      this.$refs.kkboxModal.openPanel()
+    playMusic (item) {
+      this.musicObject = item.album
+      this.musicObject.type = 'album'
+      this.musicObject.autoplay = false
+      this.$refs.kkboxModal.openModal(this.musicObject)
     },
     getNewHitData () {
       const newHitUrl = `${process.env.VUE_APP_KKBOXURL}/new-hits-playlists?territory=TW`
