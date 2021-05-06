@@ -1,6 +1,6 @@
 # synther
 ```
-CSS 命名參考 BEM 架構
+CSS 命名參考 BEM 架構， l-xxx 為 layout 簡寫
 
 ```
 ## Project setup

@@ -1,10 +1,10 @@
 <template>
   <nav class="commonNavbar" ref="commonNavbar">
     <div class="commonNavbar-top container" ref="commonNavbar-top">
-      <h1 class="lh-1"><router-link to="/" class="commonNavbar-top__logo">SYNTHER</router-link></h1>
+      <h1 class="mb-0"><router-link to="/" class="commonNavbar-top__logo">SYNTHER</router-link></h1>
       <a href="#" class="commonNavbar-top__menuToggle material-icons p-2" @click.prevent="openMenu = true">menu</a>
     </div>
-    <div class="commonNavbar-bottom container py-sm-2">
+    <div class="commonNavbar-bottom container">
       <ul class="commonNavbar-bottom__iconNav mb-0">
         <li class="me-2">
           <a href="#" class="material-icons" @click.prevent="openLoginModel()">person</a>
@@ -31,7 +31,7 @@
 </template>
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import bus from '@/bus.js'
+
 export default {
   name: 'Navbar',
   components: {},
@@ -42,12 +42,12 @@ export default {
   },
   methods: {
     openLoginModel () {
-      bus.emit('openLoginModel')
+      this.$emit('open-login')
     },
-    ...mapActions('cartModules', ['toggleCartPanel'])
+    ...mapActions('cartsModule', ['toggleCartPanel'])
   },
   computed: {
-    ...mapGetters('cartModules', ['cartInfo'])
+    ...mapGetters('cartsModule', ['cartInfo'])
   },
   mounted () {
     let prevScrollpos = window.pageYOffset

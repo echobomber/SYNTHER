@@ -23,12 +23,10 @@ export default {
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
       axios.get(url)
         .then((res) => {
-          console.log(res)
           if (res.data.data.carts) {
             context.commit('CARTINFO', res.data.data)
           }
           context.commit('LOADING', false, { root: true })
-          console.log('取得購物車', res.data.data)
         })
         .catch((error) => {
           console.log(error)
@@ -41,14 +39,12 @@ export default {
         .then((response) => {
           context.commit('LOADING', false, { root: true })
           context.dispatch('getCart')
-          console.log('刪除購物車項目', response)
         })
         .catch((error) => {
           console.log(error)
         })
     },
     addtoCart (context, { id, qty }) {
-      console.log('test', id, qty)
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
       context.commit('LOADING', true, { root: true })
       const item = {
@@ -59,7 +55,6 @@ export default {
         .then((res) => {
           context.commit('LOADING', false, { root: true })
           context.dispatch('getCart')
-          console.log('加入購物車:', res)
         })
         .catch((error) => {
           console.log(error)

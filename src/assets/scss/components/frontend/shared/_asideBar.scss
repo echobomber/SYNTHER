@@ -1,6 +1,6 @@
 .asideNav-left{
   display: none;
-  @include ipad {
+  @include computer {
     z-index: 10;
     display: flex;
     justify-content: center;

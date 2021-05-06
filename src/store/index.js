@@ -1,6 +1,7 @@
 import { createStore } from 'vuex'
-import cartModules from './cart'
-import productModules from './product'
+import cartsModule from './cart'
+import productsModule from './product'
+import kkboxModule from './kkbox'
 
 export default createStore({
   state: {
@@ -20,7 +21,8 @@ export default createStore({
     isLoading: state => state.isLoading
   },
   modules: {
-    cartModules,
-    productModules
+    cartsModule,
+    productsModule,
+    kkboxModule
   }
 })

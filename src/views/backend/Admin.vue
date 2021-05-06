@@ -1,19 +1,16 @@
 <template>
   <div>
-    <asidebar></asidebar>
-    <div class="admin-content p-4" :class="{ 'open' : isExpanded}">
-      <div class="container">
-        <navbar></navbar>
-        <router-view />
-      </div>
+    <asidebar ref="asidebar"></asidebar>
+    <div class="admin-content pb-lg-3" :class="{ 'close' : isClose}" ref="admin-content">
+      <navbar @toggle-asidebar="toggleAsidebar"></navbar>
+      <router-view />
     </div>
   </div>
 </template>
 
 <script>
-import bus from '@/bus.js'
-import asidebar from '@/components/backend/Admin_asidebar.vue'
-import navbar from '@/components/backend/Admin_navbar.vue'
+import asidebar from '@/components/backend/shared/Admin_asidebar.vue'
+import navbar from '@/components/backend/shared/Admin_navbar.vue'
 
 export default {
   name: 'Admin',
@@ -23,16 +20,16 @@ export default {
   },
   data () {
     return {
-      isExpanded: false
+      isClose: false
+    }
+  },
+  methods: {
+    toggleAsidebar () {
+      this.isClose = !this.isClose
+      this.$refs.asidebar.toggleAsidebar()
     }
   },
   created () {
-    const token = document.cookie.replace(/(?:(?:^|.*;\s*)hexToken\s*=\s*([^;]*).*$)|^.*$/, '$1')
-    this.$http.defaults.headers.common.Authorization = `${token}`
-    //
-    bus.on('expandContent', () => {
-      this.isExpanded = !this.isExpanded
-    })
   }
 }
 </script>

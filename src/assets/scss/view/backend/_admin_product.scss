@@ -1,0 +1,15 @@
+.l-admin-product__table {
+  overflow-x: scroll;
+  @include mobile {
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+.admin-product__table {
+  width: 800px;
+  @include mobile {
+    width: 100%;
+  }
+}
+

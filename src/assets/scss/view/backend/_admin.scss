@@ -1,7 +1,36 @@
 .admin-content {
-  transition: all 0.3s;
   margin-left: 0;
-  &.open {
-    margin-left: 20%;
+  min-height: 100vh;
+  background-color: $cLight;
+  @include computer {
+    transition: all 0.3s;
+    margin-left: 15%;
+    &.close {
+      margin-left: 0;
+    }
+  }
+}
+.admin-panel--main{
+  margin-top: 62px;
+  box-shadow: $admin-boxShadow;
+  background-color: #fff;
+  @include mobile {
+    width: 95%;
+    margin: 0 auto;
+  }
+}
+.admin-banner {
+  height: 300px;
+  background: url('~@/assets/img/page_banner3.png') center / cover no-repeat;
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+  &__title {
+    // font-weight: 300;
+    font-size: 3rem;
   }
 }

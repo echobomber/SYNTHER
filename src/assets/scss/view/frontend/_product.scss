@@ -5,12 +5,12 @@
   align-items: center;
   color: #000000;
   height: 300px;
-  background: url('~@/assets/img/page_banner2.png') center center / cover no-repeat;
+  background: url('~@/assets/img/page_banner3.png') center center / cover no-repeat;
   @include mobile{
     height: 400px;
     background: 
       url('~@/assets/img/headphone.png') right -5% center / 50% no-repeat,
-      url('~@/assets/img/page_banner2.png') center center / cover no-repeat ;
+      url('~@/assets/img/page_banner3.png') center center / cover no-repeat ;
   }
   &__title {
     display: flex;
@@ -76,7 +76,7 @@
       color: $gray-900;
       &:hover {
         .material-icons {
-          color: $skyBlue;
+          color: $primary;
         }
       }
     }

@@ -33,13 +33,13 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('cartModules', ['cartPanelOpen', 'cartInfo'])
+    ...mapGetters('cartsModule', ['cartPanelOpen', 'cartInfo'])
   },
   methods: {
     removeCart (id) {
-      this.$store.dispatch('cartModules/removeCart', id)
+      this.$store.dispatch('cartsModule/removeCart', id)
     },
-    ...mapActions('cartModules', ['toggleCartPanel', 'getCart'])
+    ...mapActions('cartsModule', ['toggleCartPanel', 'getCart'])
   },
   mounted () {
     this.getCart()

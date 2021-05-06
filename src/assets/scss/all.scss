@@ -3,20 +3,23 @@
 @import "~bootstrap/scss/bootstrap";
 
 // 通用
-@import  "./_common";
 @import  "./helpers/_mixins";
+@import  "./_shared";
 
 // 前台元件
-@import  "./components/frontend/_navbar";
-@import  "./components/frontend/_asidebar";
-@import  "./components/frontend/_cartPanel";
-@import  "./components/frontend/_login";
+@import  "./components/frontend/shared/_navbar";
+@import  "./components/frontend/shared/_asidebar";
+@import  "./components/frontend/shared/_cartPanel";
+@import  "./components/frontend/shared/_login";
+@import  "./components/frontend/index/_newHits";
 // 後台元件
-@import  "./components/backend/_admin_asidebar";
-@import  "./components/backend/_admin_navbar";
+@import  "./components/backend/shared/_admin_asidebar";
+@import  "./components/backend/shared/_admin_navbar";
+
 // 前台 view
 @import  "./view/frontend/_index";
 @import  "./view/frontend/_product";
 
 // 後台 view
 @import  "./view/backend/_admin";
+@import  "./view/backend/_admin_product";

@@ -1,12 +1,12 @@
 <template>
   <div>
     <!-- Modal -->
-    <div class="loginPanel modal fade" id="loginModel" tabindex="-1" aria-labelledby="loginModel" aria-hidden="true" ref="loginModel">
+    <div class="loginPanel modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModal" aria-hidden="true" ref="loginModal">
       <div class="modal-dialog modal-dialog-centered modal-xl">
         <div class="modal-content">
         <div class="container">
           <h5 class="" id="exampleModalLabel">登入帳戶</h5>
-          <button type="button" class="btn-close"  aria-label="Close" @click.prevent="closeModel()"></button>
+          <button type="button" class="btn-close"  aria-label="Close" @click.prevent="closeModal()"></button>
         </div>
           <Form v-slot="{ errors }" @submit="login">
             <div class="modal-body">
@@ -28,7 +28,7 @@
           <!--
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">登入帳戶</h5>
-            <button type="button" class="btn-close"  aria-label="Close" @click.prevent="closeModel()"></button>
+            <button type="button" class="btn-close"  aria-label="Close" @click.prevent="closeModal()"></button>
           </div>
           <Form v-slot="{ errors }" @submit="login">
             <div class="modal-body">
@@ -61,7 +61,6 @@ https://github.com/twbs/bootstrap/discussions/32347
 // 不加這行註解就不能用 new bootstrap，因為 eslint 會判定成沒有宣告過的變數。
 /* global bootstrap */
 /* global $ */
-import bus from '@/bus.js'
 
 export default {
   name: 'login',
@@ -78,12 +77,15 @@ export default {
   computed: {
   },
   methods: {
-    closeModel () {
+    openModal () {
+      this.loginModal.show()
+    },
+    closeModal () {
       this.loginModal.hide()
       $('.modal-backdrop').remove()
     },
     login () {
-      this.closeModel()
+      this.closeModal()
       this.$store.dispatch('updateLoading', true)
       const api = `${process.env.VUE_APP_APIPATH}/admin/signin`
       this.$http.post(api, this.user).then((response) => {
@@ -97,15 +99,11 @@ export default {
     }
   },
   mounted () {
-    // Bootstrap 5 有 Bug，loginModal 必須使用 document.getElementById，不能使用 jQuery 的 $
-    const loginModalEl = document.getElementById('loginModel')
-    this.loginModal = new bootstrap.Modal(loginModalEl)
+    // 只能用 document.getElementById，不能使用 jQuery 的 $ 或 $refs
+    this.loginModal = new bootstrap.Modal(document.getElementById('loginModal'))
     // hidden.bs.modal 必須用 jQuery 才可以觸發，用 addEventListener 不會觸發
     $('#loginModel').on('hidden.bs.modal', function (event) {
       $('.modal-backdrop').remove()
-    })
-    bus.on('openLoginModel', () => {
-      this.loginModal.show()
     })
   }
 }

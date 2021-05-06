@@ -1,0 +1,60 @@
+*, *::after, *::before {
+}
+*::selection {
+  background: #000;
+  color: #fff;
+}
+html, body {
+  font-family: 'Poppins', 'Noto Sans TC', sans-serif;
+}
+a {
+  text-decoration: none;
+  color: #000000;
+  &:hover {
+    text-decoration: none;
+  }
+}
+.frontPage-content {
+  margin-top: 60px;
+  @include mobile {
+    margin-top: 114px;
+  }
+}
+// pagination
+.shared-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  li {
+    margin-right: 10px;
+    background-color: #000;
+  }
+  a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #000;
+    &:hover, &.active {
+      background-color: $primary;
+      border: 1px solid $primary;
+    }
+  }
+  .material-icons {
+    font-size: 0.8rem;
+    background-color: #000;
+    color: #fff;
+    &:hover {
+      border: 1px solid #000;
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+  }
+}
+// swiper style
+.swiper-pagination-bullet-active {
+  background-color: #000 !important;
+}

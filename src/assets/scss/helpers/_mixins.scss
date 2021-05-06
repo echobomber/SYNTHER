@@ -1,20 +1,34 @@
 @mixin rwd($width){
   @media (min-width: $width){
-      @content;
+    @content;
   }
 }
+// ipad Pro 以上
 @mixin computer{
-  @media (min-width: 1000px){
-      @content;
+  @media (min-width: 1025px){
+    @content;
   }
 }
 @mixin ipad{
   @media (min-width: 768px){
-      @content;
+    @content;
   }
 }
+// 手機畫面分界點
 @mixin mobile{
   @media (min-width: 767px){
-      @content;
+    @content;
+  }
+}
+// iphone 6/7/8 以上
+@mixin mobile-sm{
+  @media (min-width: 375px){
+    @content;
+  }
+}
+// iphone 5/SE 以上
+@mixin mobile-xs{
+  @media (min-width: 320px){
+    @content;
   }
 }

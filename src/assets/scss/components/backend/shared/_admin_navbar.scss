@@ -1,0 +1,55 @@
+.l-admin-navbar{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #000;
+  padding: 10px 0;
+  z-index: 10;
+  box-shadow: $admin-boxShadow;
+  @include computer {
+    position: static;
+    background: $white;
+  }
+}
+.admin-navbar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 95%;
+  margin: 0 auto;
+  &__logo {
+    display: block;
+    font-weight: 900;
+    color: $white;
+    @include computer {
+      display: none;
+    }
+  }
+  &__menuToggle {
+    color: $white;
+    font-size: 2rem;
+    padding: 5px;
+    @include computer {
+      display: none;
+    }
+  }
+}
+
+.admin-asidebarToggle {
+  display: none;
+  @include computer {
+    display: inline-block;
+    font-size: 2rem;
+    transition: all 0.3s;
+    transform: rotate(0);
+    border: 2px solid transparent;
+    &.isCLose {
+      transform: rotate(180deg);
+    }
+    &:hover {
+      color: #000;
+      border: 2px solid #000;
+    }
+  }
+}

@@ -29,14 +29,17 @@ configure({
 setLocale('zh_TW') // 設定預設語系
 
 const app = createApp(App)
-app.use(store).use(router)
-app.use(VueAxios, axios)
-// 註冊 vee-validate 三個全域元件
-app.component('Form', Form)
-app.component('Field', Field)
-app.component('ErrorMessage', ErrorMessage)
-// loading
-app.component('Loading', Loading)
+app
+  .use(store)
+  .use(router)
+  .use(VueAxios, axios)
+  // 註冊 vee-validate 三個全域元件
+  .component('Form', Form)
+  .component('Field', Field)
+  .component('ErrorMessage', ErrorMessage)
+  // loading
+  .component('Loading', Loading)
+
 app.mount('#app')
 
 // 路由守衛

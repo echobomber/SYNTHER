@@ -14,7 +14,10 @@ const routes = [
       {
         path: 'product',
         name: 'Product',
-        component: () => import('../views/frontend/Product.vue')
+        component: () => import('../views/frontend/Product.vue'),
+        meta: {
+          title: '商品頁面'
+        }
       },
       {
         path: 'product_detail',
@@ -31,12 +34,13 @@ const routes = [
   {
     path: '/admin',
     name: 'Admin',
-    component: () => import('../views/backend/Admin.vue'),
     meta: { requiresAuth: true },
+    component: () => import('../views/backend/Admin.vue'),
     children: [
       {
         path: 'products',
         name: 'Admin_Products',
+        meta: { requiresAuth: true },
         component: () => import('../views/backend/Admin_Products.vue')
       }
     ]
