@@ -54,8 +54,8 @@
       transition: all .3s;
       background-color: #fff;
       border: 1px solid $gray-500;
-      width: 70px;
-      height: 70px;
+      width: 60px;
+      height: 60px;
       &:hover {
         background-color: #000;
         color: #fff;
@@ -91,9 +91,10 @@
     background-color: rgba(0, 0, 0, 0.05);
   }
   &__img {
-    display: none;
-    max-width: 60px;
+    // display: none;
+    max-width: 40px;
     @include mobile {
+      max-width: 60px;
       display: block;
     }
   }
@@ -101,11 +102,12 @@
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     font-weight: 600;
     padding: 10px;
     @include mobile {
       padding: 20px;
+      font-size: 1.1rem;
       flex-direction: row;
       align-items: center;
     }
@@ -120,6 +122,12 @@
       display: block;
       padding: 10px;
       font-size: 1.5rem;
+      &:first-child {
+        display: none;
+        @include mobile {
+          display: block;
+        }
+      }
       &:hover {
         color: $gray-600;
       }
